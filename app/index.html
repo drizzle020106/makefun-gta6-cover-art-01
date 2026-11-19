@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div>
+      <h1>Vice Cover Studio</h1>
+      <p class="sub">Turn your photo and a caption into poster-style cover art — panels, sunset grade, bold lettering. Your photos never leave this machine.</p>
+    </div>
+    <div class="size-picker" role="group" aria-label="Cover size">
+      <button type="button" data-size="square" class="size-btn active">1080 × 1080</button>
+      <button type="button" data-size="portrait" class="size-btn">1080 × 1350</button>
+      <button type="button" data-size="landscape" class="size-btn">1920 × 1080</button>
+    </div>
+  </header>
+
+  <section class="workspace">
+    <aside class="controls">
+      <section class="block">
+        <h2>1 · Photos</h2>
+        <label class="upload">Add your photo
+          <input id="upload" type="file" accept="image/*" multiple>
+        </label>
+        <div class="samples" id="samples">
+          <button type="button" class="sample-btn" data-photo="pier">Pier sunset · sample</button>
+          <button type="button" class="sample-btn" data-photo="boulevard">Boulevard · sample</button>
+        </div>
+        <p class="hint">Click a sample to fill every panel with it, or pick a photo per panel below. Uploaded photos stay in your browser.</p>
+      </section>
+
+      <section class="block">
+        <h2>2 · Layout &amp; grade</h2>
+        <div class="row" id="layouts" role="group" aria-label="Layout">
+          <button type="button" data-layout="hero" class="pill active">Hero + two</button>
+          <button type="button" data-layout="quad" class="pill">Four panels</button>
+          <button type="button" data-layout="strip" class="pill">Hero + strip</button>
+        </div>
+        <label>Colour grade
+          <select id="grade">
+            <option value="sunset">Sunset — warm orange &amp; magenta</option>
+            <option value="neon">Neon nights — cyan &amp; pink</option>
+            <option value="dusk">Dusk — deep purple</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="block">
+        <h2>3 · Caption</h2>
+        <label>Caption
+          <input id="caption" type="text" maxlength="48" value="Sunset Heist">
+        </label>
+        <label>Tagline
+          <input id="tagline" type="text" maxlength="40" value="A Leonida Story">
+        </label>
+      </section>
+
+      <section class="block">
+        <h2>4 · Panels</h2>
+        <div class="panel-tabs" id="panelTabs" role="group" aria-label="Panel"></div>
+        <label>Photo in this panel
+          <select id="panelPhoto"></select>
+        </label>
+        <label>Zoom <span class="val" id="zoomVal">100%</span>
+          <input id="zoom" type="range" min="1" max="3" step="0.01" value="1">
+        </label>
+        <label>Move left / right
+          <input id="ox" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+        </label>
+        <label>Move up / down
+          <input id="oy" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+        </label>
+        <button type="button" id="fillAll" class="ghost">Use this photo in all panels</button>
+        <p class="hint">Tip: drag the photo inside the preview to move it, scroll over it to zoom.</p>
+      </section>
+
+      <section class="block export-block">
+        <h2>5 · Export</h2>
+        <button type="button" id="exportSquare" class="export">Export PNG · 1080 × 1080</button>
+        <button type="button" id="exportPortrait" class="export">Export PNG · 1080 × 1350</button>
+        <button type="button" id="exportLandscape" class="export">Export PNG · 1920 × 1080</button>
+        <p id="status" role="status"></p>
+      </section>
+    </aside>
+
+    <section class="preview-wrap">
+      <canvas id="preview" width="1080" height="1080" aria-label="Live cover preview"></canvas>
+      <p class="preview-hint">Live preview — click a panel to edit it.</p>
+    </section>
+  </section>
+
+  <footer class="foot">
+    <p>Original cover maker. The lettering uses Anton, licensed under the SIL Open Font License (see fonts/OFL.txt). No game artwork, logo or font is used.</p>
+  </footer>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
